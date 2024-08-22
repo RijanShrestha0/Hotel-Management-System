@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 struct hotel{
     /* data */
@@ -66,6 +67,8 @@ int login(struct user users[], int *loggedInUserId, int numUsers) {
 
     printf("Enter password: ");
     scanf("%49s", password); // "%49s" To prevent buffer overflow
+
+    // getpass("Enter password: ");
 
     for (int i = 0; i < numUsers; i++) {
         if (strcmp(username, users[i].username) == 0 && strcmp(password, users[i].password) == 0) {
