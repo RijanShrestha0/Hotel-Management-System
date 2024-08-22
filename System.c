@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
-#include "booking-function.c"
+#include "Function.c"
 
 int main() {
     int choice;
