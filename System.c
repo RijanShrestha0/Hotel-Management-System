@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -19,7 +18,6 @@ int main() {
     int numUsers = 1; 
     int numRooms = 3;
 
-
     while (status){
         display();
         printf("Enter your choice: ");
@@ -29,6 +27,7 @@ int main() {
         case 1:
             if (login(users, &loggedInUserId, numUsers) == 1) {
                 printf("Login successful. Welcome!\n");
+
                 // Display user menu
                 while (status == true) {
                     displayUserMenu();
@@ -37,6 +36,17 @@ int main() {
                     case 1:
                         printf("Book a Room\n");
                         bookRoom(rooms, numRooms);
+
+                        FILE *fp = fopen("rooms.txt", "wb");
+                        if (fp != NULL) {
+                            for (int i = 0; i < numRooms; i++) {
+                                fprintf(fp, "%d\n", rooms[i].roomnum);
+                            }
+                            fclose(fp);
+                        } else {
+                            printf("Error opening file for writing.\n");
+                        }
+
                         break;
                     case 2:
                         printf("Cancel a Booking\n");

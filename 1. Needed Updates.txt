@@ -1,0 +1,47 @@
+// struct login (struct user users[], int *loggedInUserId, int numUsers) {
+//     char username[50];
+//     char password[50];
+//     printf("enter username: ");
+//     scanf("%s", username);
+//     printf("enter password: ");
+//     scanf("%s", password);
+//         for (int i = 0; i < numUsers; i++) {
+//         if (strcmp(username, users[i].username) == 0 && strcmp(password, users[i].password) == 0) {
+//             *loggedInUserId = i;
+//             return;
+//         }
+//     }
+
+//     *loggedInUserId = -1;
+// }
+
+// void getPassword(char *password, int maxLen) {
+//     struct termios oldt, newt;
+//     int i = 0;
+//     char ch;
+
+//     // Turn echoing off and fail if we can't.
+//     if (tcgetattr(STDIN_FILENO, &oldt) != 0) {
+//         perror("tcgetattr");
+//         return;
+//     }
+//     newt = oldt;
+//     newt.c_lflag &= ~ECHO;
+//     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &newt) != 0) {
+//         perror("tcsetattr");
+//         return;
+//     }
+
+//     // Read the password
+//     printf("Enter password: ");
+//     while ((ch = getchar()) != '\n' && ch != EOF && i < maxLen - 1) {
+//         password[i++] = ch;
+//     }
+//     password[i] = '\0';
+
+//     // Restore echoing
+//     if (tcsetattr(STDIN_FILENO, TCSANOW, &oldt) != 0) {
+//         perror("tcsetattr");
+//     }
+//     printf("\n");
+// }
