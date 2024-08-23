@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <termios.h>
 
 struct hotel{
     /* data */
@@ -58,27 +59,63 @@ void displayUserMenu() {
 //     *loggedInUserId = -1;
 // }
 
+// void getPassword(char *password, int maxLen) {
+//     struct termios oldt, newt;
+//     int i = 0;
+//     char ch;
+
+//     // Turn echoing off and fail if we can't.
+//     if (tcgetattr(STDIN_FILENO, &oldt) != 0) {
+//         perror("tcgetattr");
+//         return;
+//     }
+//     newt = oldt;
+//     newt.c_lflag &= ~ECHO;
+//     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &newt) != 0) {
+//         perror("tcsetattr");
+//         return;
+//     }
+
+//     // Read the password
+//     printf("Enter password: ");
+//     while ((ch = getchar()) != '\n' && ch != EOF && i < maxLen - 1) {
+//         password[i++] = ch;
+//     }
+//     password[i] = '\0';
+
+//     // Restore echoing
+//     if (tcsetattr(STDIN_FILENO, TCSANOW, &oldt) != 0) {
+//         perror("tcsetattr");
+//     }
+//     printf("\n");
+// }
+
 int login(struct user users[], int *loggedInUserId, int numUsers) {
     char username[50];
     char password[50];
 
     printf("Enter username: ");
-    scanf("%49s", username); // "%49s" To prevent buffer overflow
+    scanf("%49s", username);
 
     printf("Enter password: ");
-    scanf("%49s", password); // "%49s" To prevent buffer overflow
+    scanf("%49s", password); 
 
-    // getpass("Enter password: ");
+    // getpass("Enter password: ", password);
+    // getpass(password);
+
+    // getPassword(password, maxlen);
+
+    // "%49s" To prevent buffer overflow
 
     for (int i = 0; i < numUsers; i++) {
         if (strcmp(username, users[i].username) == 0 && strcmp(password, users[i].password) == 0) {
             *loggedInUserId = i;
-            return 1; // Return 1 indicate's successful
+            return 1;
         }
     }
 
     *loggedInUserId = -1;
-    return 0; // Return 0 indicate's failed
+    return 0;
 }
 
 void bookRoom(struct hotel rooms[], int numRooms) {
@@ -91,12 +128,12 @@ void bookRoom(struct hotel rooms[], int numRooms) {
     }
     printf("Enter your choice: ");
     scanf("%d", &roomChoice);
-    roomChoice--; // Adjust for 0-based indexing
+    roomChoice--;
     if (roomChoice >= 0 && roomChoice < numRooms && !rooms[roomChoice].isBooked) {
         rooms[roomChoice].isBooked = true;
         printf("Room %d booked successfully.\n", rooms[roomChoice].roomnum);
     } else {
-        printf("Invalid choice or room already booked.\n");
+        printf("\n The room is already booked.\n");
     }
 }
 
@@ -110,12 +147,12 @@ void cancelBooking(struct hotel rooms[], int numRooms) {
     }
     printf("Enter your choice: ");
     scanf("%d", &roomChoice);
-    roomChoice--; // Adjust for 0-based indexing
+    roomChoice--; 
     if (roomChoice >= 0 && roomChoice < numRooms && rooms[roomChoice].isBooked) {
         rooms[roomChoice].isBooked = false;
         printf("Room %d cancelled successfully.\n", rooms[roomChoice].roomnum);
     } else {
-        printf("Invalid choice or room not booked.\n");
+        printf("\n The room is not booked.\n");
     }
 }
 
