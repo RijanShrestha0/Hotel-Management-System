@@ -56,15 +56,15 @@ int main() {
                     }
                 }
                 } else {
-                printf("Login failed. Please check your username and password.\n");
+                printf("\n Login failed. Please check your username and password.\n");
             }
             break;
         case 2:
-            printf("Thank you!, See you Next time soon...\n");
+            printf("\n Thank you!, See you Next time soon...\n");
             status = false;
             return 1;
         default:
-            printf("Invalid choice! Try Again... \n");
+            printf("\n Invalid choice! Try Again... \n");
             break;
         }
     }
