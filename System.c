@@ -46,7 +46,6 @@ int main() {
                         } else {
                             printf("Error opening file for writing.\n");
                         }
-
                         break;
                     case 2:
                         printf("Cancel a Booking\n");
